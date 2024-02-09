@@ -1,0 +1,10 @@
+insert into categories(categoryName, categoryBudget, cDate) values('food',6000,'06/02/2024');
+insert into categories(categoryName, categoryBudget, cDate) values('rent',5000,'06/02/2024');
+insert into categories(categoryName, categoryBudget, cDate) values('shopping',2000,'06/02/2024');
+insert into categories(categoryName, categoryBudget, cDate) values('travel',1000,'06/02/2024');
+insert into categories(categoryName, categoryBudget, cDate) values('EMI',3000,'06/02/2024');
+insert into users(userName,userDate) values('dhanush','07/02/2024');
+insert into users(userName,userDate) values('venu','08/02/2024');
+insert into users(userName,userDate) values('rahul','07/02/2024');
+insert into users(userName,userDate) values('kavi','07/02/2024');
+insert into users(userName,userDate) values('servesh','07/02/2024');
