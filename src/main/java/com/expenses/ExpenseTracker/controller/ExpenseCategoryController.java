@@ -1,9 +1,10 @@
 package com.expenses.ExpenseTracker.controller;
+
 import com.expenses.ExpenseTracker.dao.ExpenseCategory;
 import com.expenses.ExpenseTracker.services.ExpenseCategoryH2Service;
-import com.expenses.ExpenseTracker.services.ExpenseCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 @RestController
 public class ExpenseCategoryController {
@@ -33,6 +34,7 @@ public class ExpenseCategoryController {
     public void deleteCategory(@PathVariable("categoryId") int categoryId) {
         categoryService.deleteCategory(categoryId);
     }
+    //
 
 //    @PutMapping("/categories/{categoryId}")
 //    public ExpenseCategory spend(@PathVariable("categoryId") int categoryId,

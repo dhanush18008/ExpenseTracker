@@ -16,7 +16,7 @@ public class ExpenseCategoryH2Service implements ExpenseCategoryRepository {
     public ArrayList<ExpenseCategory> getAllCategories() {
         return  new ArrayList<>(db.query("SELECT* FROM categories",new ExpenseCategoryRowMapper()));
     }
-
+//
     @Override
     public ExpenseCategory getCategoryById(int categoryId) {
         try{

@@ -44,7 +44,7 @@ public class UserH2Service implements UserRepository {
 
         return getUserByName(UserName);
     }
-
+//
     @Override
     public void deleteUser(String userName) {
         db.update("DELETE FROM USERS WHERE userName=?",userName);

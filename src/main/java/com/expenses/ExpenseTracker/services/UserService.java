@@ -23,6 +23,7 @@ private int uniqueId=1;
         Collection<User> allUser=users.values();
         return new ArrayList<User>(allUser);
     }
+    //
     @Override
     public User getUserByName(String userName){
         //addData();

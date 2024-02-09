@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ExpenseCategoryRowMapper implements RowMapper<ExpenseCategory> {
-
+//
 
     @Override
     public ExpenseCategory mapRow(ResultSet rs, int rowNum) throws SQLException {

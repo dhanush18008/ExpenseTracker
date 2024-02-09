@@ -14,7 +14,7 @@ public class ExpenseCategory {
     private String categoryName;
     private int categoryBudget;
     private String date;
-
+//
     public ExpenseCategory(){}
 
     public ExpenseCategory(int categoryId, String categoryName, int categoryBudget, String date) {
