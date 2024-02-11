@@ -17,7 +17,7 @@ public class User {
      @Id
      @Column(name = "username")
      private String userName;
-     @Column(name = "userDate")
+     @Column(name = "userdate")
      private String userDate;
      public User(){
 

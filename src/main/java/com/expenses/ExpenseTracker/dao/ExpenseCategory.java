@@ -19,12 +19,11 @@ public class ExpenseCategory {
     @Column(name = "categoryid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int categoryId;
-    @Id
-    @Column(name = "category")
+    @Column(name = "categoryname")
     private String categoryName;
-    @Column(name = "categoryBudget")
+    @Column(name = "categorybudget")
     private int categoryBudget;
-    @Column(name = "date")
+    @Column(name = "cdate")
     private String date;
 //
     public ExpenseCategory(){}

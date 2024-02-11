@@ -36,6 +36,7 @@ public class SecurityConfig {
                         .anyRequest()
                         .authenticated());
         http.httpBasic(Customizer.withDefaults());
+        http.headers(AbstractHttpConfigurer::disable);
         return http.build();
     }
     @Bean

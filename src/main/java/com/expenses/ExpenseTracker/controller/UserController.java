@@ -2,6 +2,7 @@ package com.expenses.ExpenseTracker.controller;
 
 import com.expenses.ExpenseTracker.dao.User;
 import com.expenses.ExpenseTracker.services.UserH2Service;
+import com.expenses.ExpenseTracker.services.UserJPAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 @RestController
 public class UserController {
     @Autowired
-    UserH2Service userservice;
+    UserJPAService userservice;
     @GetMapping("/users")
     public ArrayList<User> getAllUsers() {
         return userservice.getAllUsers();

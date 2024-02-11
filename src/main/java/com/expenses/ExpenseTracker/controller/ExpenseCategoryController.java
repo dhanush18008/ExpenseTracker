@@ -2,6 +2,7 @@ package com.expenses.ExpenseTracker.controller;
 
 import com.expenses.ExpenseTracker.dao.ExpenseCategory;
 import com.expenses.ExpenseTracker.services.ExpenseCategoryH2Service;
+import com.expenses.ExpenseTracker.services.ExpenseCategoryJPAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @RestController
 public class ExpenseCategoryController {
     @Autowired
-    ExpenseCategoryH2Service categoryService;
+    ExpenseCategoryJPAService categoryService;
     @GetMapping("/categories")
     public List<ExpenseCategory> getAllCategories() {
         return categoryService.getAllCategories();
