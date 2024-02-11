@@ -58,4 +58,9 @@ public class ExpenseCategoryService implements ExpenseCategoryRepository {
            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
        }
     }
+
+    @Override
+    public ExpenseCategory spend(int categoryId, ExpenseCategory category) {
+        return null;
+    }
 }

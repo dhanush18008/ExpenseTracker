@@ -3,7 +3,6 @@ package com.expenses.ExpenseTracker.services;
 import com.expenses.ExpenseTracker.dao.ExpenseCategory;
 import com.expenses.ExpenseTracker.repo.ExpenseCategoryJPARepository;
 import com.expenses.ExpenseTracker.repo.ExpenseCategoryRepository;
-import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -67,5 +66,17 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
+    }
+
+    @Override
+    public ExpenseCategory spend(int categoryId, ExpenseCategory category) {
+        try {
+            ExpenseCategory expenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
+            expenseCategory.setDate(category.getDate());
+            expenseCategory.setCategoryBudget(expenseCategory.getCategoryBudget()-category.getCategoryBudget());
+            return expenseCategory;
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 }

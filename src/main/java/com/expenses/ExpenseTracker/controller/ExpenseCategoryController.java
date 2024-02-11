@@ -42,5 +42,14 @@ public class ExpenseCategoryController {
 //                                 @RequestBody ExpenseCategory category){
 //        return categoryService.spend()
 //    }
+//public ExpenseCategory updateCategory(
+//        @PathVariable("categoryId") int categoryId,
+//        @RequestBody ExpenseCategory category) {
+//    return categoryService.updateCategory(categoryId, category);
+//}
+    @PutMapping("/categories/spend/{categoryId}")
+    public ExpenseCategory spend(@PathVariable("amount")int categoryId,@RequestBody ExpenseCategory category){
+        return categoryService.spend(categoryId,category);
+    }
 
 }

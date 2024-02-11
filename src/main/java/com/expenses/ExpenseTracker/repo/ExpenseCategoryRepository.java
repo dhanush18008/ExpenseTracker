@@ -12,5 +12,6 @@ public interface ExpenseCategoryRepository {
     public ExpenseCategory updateCategory(int categoryId, ExpenseCategory category);
     public void deleteCategory(int categoryId);
 
+    ExpenseCategory spend(int categoryId, ExpenseCategory category);
 }
 //

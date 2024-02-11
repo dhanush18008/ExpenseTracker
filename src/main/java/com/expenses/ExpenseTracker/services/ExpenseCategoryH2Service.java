@@ -56,4 +56,9 @@ public class ExpenseCategoryH2Service implements ExpenseCategoryRepository {
 //
         db.update("DELETE FROM CATEGORIES WHERE categoryId=?",categoryId);
     }
+
+    @Override
+    public ExpenseCategory spend(int categoryId, ExpenseCategory category) {
+        return null;
+    }
 }
