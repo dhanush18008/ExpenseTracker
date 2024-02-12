@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import javax.print.attribute.standard.MediaSize;
-
 
 @Setter
 @Getter
@@ -23,16 +21,18 @@ public class ExpenseCategory {
     private String categoryName;
     @Column(name = "categorybudget")
     private int categoryBudget;
-    @Column(name = "cdate")
-    private String date;
+    @Column(name = "dateofcreation")
+    private String dateOfCreation;
+    @Column(name = "lastupdateddate")
+    private String lastUpdatedDate;
 //
     public ExpenseCategory(){}
 
-    public ExpenseCategory(int categoryId, String categoryName, int categoryBudget, String date) {
+    public ExpenseCategory(int categoryId, String categoryName, int categoryBudget, String dateOfCreation, String lastUpdatedDate) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
         this.categoryBudget = categoryBudget;
-        this.date = date;
+        this.dateOfCreation = dateOfCreation;
+        this.lastUpdatedDate = lastUpdatedDate;
     }
-
 }

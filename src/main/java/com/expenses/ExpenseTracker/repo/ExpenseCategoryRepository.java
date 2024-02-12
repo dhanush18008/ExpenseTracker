@@ -13,5 +13,7 @@ public interface ExpenseCategoryRepository {
     public void deleteCategory(int categoryId);
 
     ExpenseCategory spend(int categoryId, ExpenseCategory category);
+
+    int amountRequired();
 }
 //

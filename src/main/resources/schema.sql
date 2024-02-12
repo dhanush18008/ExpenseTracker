@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS categories(
 categoryId INT PRIMARY KEY AUTO_INCREMENT,
 categoryName VARCHAR(255),
 categoryBudget INT,
-cDate VARCHAR(255)
+dateofcreation VARCHAR(255),
+lastUpdatedDate VARCHAR(255)
 );
 CREATE TABLE IF NOT EXISTS users(
 userId INT AUTO_INCREMENT,

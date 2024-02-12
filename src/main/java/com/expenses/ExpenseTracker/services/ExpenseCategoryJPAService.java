@@ -8,17 +8,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Service
 public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
     @Autowired
     private ExpenseCategoryJPARepository expenseCategoryJPARepository;
+    public static final String HISTORY_FILE_PATH = "C:\\Users\\Admin\\Downloads\\ExpenseTracker\\src\\main\\resources\\expense_history.txt";
     @Override
     public ArrayList<ExpenseCategory> getAllCategories() {
-        return new ArrayList<>(expenseCategoryJPARepository.findAll());
-    }
-    public ArrayList<ExpenseCategory> getBooks() {
         return new ArrayList<>(expenseCategoryJPARepository.findAll());
     }
 
@@ -35,6 +37,10 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
 
     @Override
     public ExpenseCategory createCategory(ExpenseCategory category) {
+        if(category.getCategoryName().length()>30 || category.getCategoryBudget() >= 2147483647)
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
+        category.setDateOfCreation(LocalDate.now().toString());
+        category.setLastUpdatedDate(LocalDate.now().toString());
         expenseCategoryJPARepository.save(category);
         return category;
     }
@@ -42,14 +48,13 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
     public ExpenseCategory updateCategory(int categoryId, ExpenseCategory category) {
         try {
             ExpenseCategory newExpenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
+            if(category.getCategoryName().length()>30 || category.getCategoryBudget()>=2147483647)
+                throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
             if(category.getCategoryName()!=null){
                 newExpenseCategory.setCategoryName(category.getCategoryName());
             }
             if(category.getCategoryBudget()!=0){
                 newExpenseCategory.setCategoryBudget(category.getCategoryBudget());
-            }
-            if(category.getDate()!=null){
-                newExpenseCategory.setDate(category.getDate());
             }
             expenseCategoryJPARepository.save(newExpenseCategory);
             return newExpenseCategory;
@@ -72,11 +77,44 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
     public ExpenseCategory spend(int categoryId, ExpenseCategory category) {
         try {
             ExpenseCategory expenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
-            expenseCategory.setDate(category.getDate());
-            expenseCategory.setCategoryBudget(expenseCategory.getCategoryBudget()-category.getCategoryBudget());
+            if(expenseCategory.getCategoryBudget()==0 || expenseCategory.getCategoryBudget()<category.getCategoryBudget()){
+                throw new ResponseStatusException(HttpStatus.NOT_EXTENDED);
+            }
+
+            expenseCategory.setLastUpdatedDate(LocalDate.now().toString());
+
+
+            if(category.getCategoryBudget()!=0) {
+                expenseCategory.setCategoryBudget(expenseCategory.getCategoryBudget() - category.getCategoryBudget());
+            }
+            logExpenseUpdateToHistory(category,expenseCategory.getCategoryBudget(),expenseCategory.getCategoryName());
+            expenseCategoryJPARepository.save(expenseCategory);
             return expenseCategory;
         }catch (Exception e){
+            ExpenseCategory expenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
+            if(expenseCategory.getCategoryBudget()==0 || expenseCategory.getCategoryBudget()<category.getCategoryBudget()){
+                throw new ResponseStatusException(HttpStatus.NOT_EXTENDED);
+            }
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+
+    private void logExpenseUpdateToHistory(ExpenseCategory category,int balance,String name) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(HISTORY_FILE_PATH, true))) {
+            String logEntry = String.format("[%s] Category: %s, Amount Spent: %d,Amount Left: %d\n",
+                    LocalDate.now(), name, category.getCategoryBudget(),balance);
+            writer.write(logEntry);
+        }
+    }
+    @Override
+    public int amountRequired() {
+        ArrayList<ExpenseCategory> a=new ArrayList<>(expenseCategoryJPARepository.findAll());
+        int sum=0;
+        for(ExpenseCategory i:a){
+            sum+=i.getCategoryBudget();
+        }
+        return sum;
+    }
+
+
 }

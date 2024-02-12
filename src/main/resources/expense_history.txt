@@ -1,0 +1,5 @@
+[2024-02-12] Category: rent, Amount Spent: 5000,Amount Left: 0
+[2024-02-12] Category: food, Amount Spent: 5,Amount Left: 5995
+[2024-02-12] Category: shopping, Amount Spent: 50,Amount Left: 1950
+[2024-02-12] Category: travel, Amount Spent: 500,Amount Left: 500
+[2024-02-12] Category: EMI, Amount Spent: 42,Amount Left: 2958

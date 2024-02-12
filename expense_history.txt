@@ -1,0 +1,2 @@
+[2024-02-12T15:48:53.974846100] Category: null, Amount Spent: 5000,Amount Left: 0
+[2024-02-12T15:52:47.989079900] Category: null, Amount Spent: 5000,Amount Left: 0
