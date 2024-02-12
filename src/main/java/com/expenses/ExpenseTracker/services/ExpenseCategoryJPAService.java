@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
     @Autowired
     private ExpenseCategoryJPARepository expenseCategoryJPARepository;
-    public static final String HISTORY_FILE_PATH = "C:\\Users\\Admin\\Downloads\\ExpenseTracker\\src\\main\\resources\\expense_history.txt";
+    public static final String HISTORY_FILE_PATH = "src/main/resources/expense_history.txt";
     @Override
     public ArrayList<ExpenseCategory> getAllCategories() {
         return new ArrayList<>(expenseCategoryJPARepository.findAll());
@@ -78,7 +78,7 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
         try {
             ExpenseCategory expenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
             if(expenseCategory.getCategoryBudget()==0 || expenseCategory.getCategoryBudget()<category.getCategoryBudget()){
-                throw new ResponseStatusException(HttpStatus.NOT_EXTENDED);
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Expense amount exceeds budget.");
             }
 
             expenseCategory.setLastUpdatedDate(LocalDate.now().toString());
