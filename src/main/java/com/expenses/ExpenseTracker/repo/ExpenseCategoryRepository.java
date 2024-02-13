@@ -4,6 +4,8 @@ import com.expenses.ExpenseTracker.dao.ExpenseCategory;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Map;
+
 @Repository
 public interface ExpenseCategoryRepository {
     public ArrayList<ExpenseCategory> getAllCategories();
@@ -14,6 +16,6 @@ public interface ExpenseCategoryRepository {
 
     ExpenseCategory spend(int categoryId, ExpenseCategory category);
 
-    int amountRequired();
+    Map<String,Integer> amountRequired();
 }
 //

@@ -12,7 +12,11 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
@@ -26,52 +30,39 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
 
     @Override
     public ExpenseCategory getCategoryById(int categoryId) {
-        try{
             ExpenseCategory expenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
             return expenseCategory;
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
     }
 
 
     @Override
     public ExpenseCategory createCategory(ExpenseCategory category) {
-        if(category.getCategoryName().length()>30 || category.getCategoryBudget() >= 2147483647)
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
-        category.setDateOfCreation(LocalDate.now().toString());
-        category.setLastUpdatedDate(LocalDate.now().toString());
         expenseCategoryJPARepository.save(category);
         return category;
     }
     @Override
     public ExpenseCategory updateCategory(int categoryId, ExpenseCategory category) {
-        try {
             ExpenseCategory newExpenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
-            if(category.getCategoryName().length()>30 || category.getCategoryBudget()>=2147483647)
-                throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
             if(category.getCategoryName()!=null){
                 newExpenseCategory.setCategoryName(category.getCategoryName());
             }
             if(category.getCategoryBudget()!=0){
                 newExpenseCategory.setCategoryBudget(category.getCategoryBudget());
             }
+        category.setLastUpdatedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString()); // Format date
             expenseCategoryJPARepository.save(newExpenseCategory);
             return newExpenseCategory;
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
     }
-
     @Override
     public void deleteCategory(int categoryId) {
         try {
             expenseCategoryJPARepository.deleteById(categoryId);
-        }catch (Exception e){
+        }
+        catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-
     }
+
 
     @Override
     public ExpenseCategory spend(int categoryId, ExpenseCategory category) {
@@ -82,6 +73,7 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
             }
 
             expenseCategory.setLastUpdatedDate(LocalDate.now().toString());
+            category.setLastUpdatedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString()); // Format date
 
 
             if(category.getCategoryBudget()!=0) {
@@ -102,18 +94,22 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
     private void logExpenseUpdateToHistory(ExpenseCategory category,int balance,String name) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(HISTORY_FILE_PATH, true))) {
             String logEntry = String.format("[%s] Category: %s, Amount Spent: %d,Amount Left: %d\n",
-                    LocalDate.now(), name, category.getCategoryBudget(),balance);
+                    LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString(), name, category.getCategoryBudget(),balance);
             writer.write(logEntry);
         }
     }
     @Override
-    public int amountRequired() {
-        ArrayList<ExpenseCategory> a=new ArrayList<>(expenseCategoryJPARepository.findAll());
+    public Map<String,Integer> amountRequired() {
+        List<ExpenseCategory> expenseCategories = getAllCategories();
+        Map<String, Integer> categoryBudgets = new HashMap<>();
         int sum=0;
-        for(ExpenseCategory i:a){
-            sum+=i.getCategoryBudget();
+
+        for (ExpenseCategory category : expenseCategories) {
+            categoryBudgets.put(category.getCategoryName(), category.getCategoryBudget());
+            sum+=category.getCategoryBudget();
         }
-        return sum;
+        categoryBudgets.put("Total : ",sum);
+        return categoryBudgets;
     }
 
 
