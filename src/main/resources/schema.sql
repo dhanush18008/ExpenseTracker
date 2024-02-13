@@ -5,8 +5,3 @@ categoryBudget INT,
 dateofcreation VARCHAR(255),
 lastUpdatedDate VARCHAR(255)
 );
-CREATE TABLE IF NOT EXISTS users(
-userId INT AUTO_INCREMENT,
-userName VARCHAR(255) PRIMARY KEY,
-userDate VARCHAR(255)
-);

@@ -9,3 +9,4 @@ public class ExpenseTrackerApplication {
 		SpringApplication.run(ExpenseTrackerApplication.class, args);
 	}
 }
+//http://localhost:9090/swagger-ui/index.html#/

@@ -30,8 +30,12 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
 
     @Override
     public ExpenseCategory getCategoryById(int categoryId) {
-            ExpenseCategory expenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
+        try {
+            ExpenseCategory expenseCategory = expenseCategoryJPARepository.findById(categoryId).get();
             return expenseCategory;
+        }catch(Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
 
@@ -45,6 +49,8 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
             ExpenseCategory newExpenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
             if(category.getCategoryName()!=null){
                 newExpenseCategory.setCategoryName(category.getCategoryName());
+            }else{
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
             }
             if(category.getCategoryBudget()!=0){
                 newExpenseCategory.setCategoryBudget(category.getCategoryBudget());
@@ -65,15 +71,15 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
 
 
     @Override
-    public ExpenseCategory spend(int categoryId, ExpenseCategory category) {
+    public ExpenseCategory spend(ExpenseCategory category) {
         try {
+            int categoryId=category.getCategoryId();
             ExpenseCategory expenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
             if(expenseCategory.getCategoryBudget()==0 || expenseCategory.getCategoryBudget()<category.getCategoryBudget()){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Expense amount exceeds budget.");
             }
 
-            expenseCategory.setLastUpdatedDate(LocalDate.now().toString());
-            category.setLastUpdatedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString()); // Format date
+            expenseCategory.setLastUpdatedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
 
 
             if(category.getCategoryBudget()!=0) {
@@ -83,6 +89,7 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
             expenseCategoryJPARepository.save(expenseCategory);
             return expenseCategory;
         }catch (Exception e){
+            int categoryId=category.getCategoryId();
             ExpenseCategory expenseCategory=expenseCategoryJPARepository.findById(categoryId).get();
             if(expenseCategory.getCategoryBudget()==0 || expenseCategory.getCategoryBudget()<category.getCategoryBudget()){
                 throw new ResponseStatusException(HttpStatus.NOT_EXTENDED);

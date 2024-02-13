@@ -3,8 +3,3 @@ insert into categories(categoryName, categoryBudget, dateofcreation,lastUpdatedD
 insert into categories(categoryName, categoryBudget, dateofcreation,lastUpdatedDate) values('shopping',2000,'10-01-2024','10-01-2024');
 insert into categories(categoryName, categoryBudget, dateofcreation,lastUpdatedDate) values('travel',1000,'10-01-2024','10-01-2024');
 insert into categories(categoryName, categoryBudget, dateofcreation,lastUpdatedDate) values('EMI',3000,'10-01-2024','10-01-2024');
-insert into users(userName,userDate) values('dhanush','10-01-2024');
-insert into users(userName,userDate) values('venu','10-01-2024');
-insert into users(userName,userDate) values('rahul','10-01-2024');
-insert into users(userName,userDate) values('kavi','10-01-2024');
-insert into users(userName,userDate) values('servesh','10-01-2024');

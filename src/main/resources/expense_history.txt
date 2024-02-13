@@ -4,3 +4,11 @@
 [13-02-2024] Category: travel, Amount Spent: 2,Amount Left: 798
 [13-02-2024] Category: EMI, Amount Spent: 2,Amount Left: 2998
 [13-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2798
+[13-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2800
+[13-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2800
+[13-02-2024] Category: travel, Amount Spent: 1000,Amount Left: 0
+[13-02-2024] Category: travel, Amount Spent: 1000,Amount Left: 0
+[13-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
+[13-02-2024] Category: EMI, Amount Spent: 2000,Amount Left: 0
+[13-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
+[13-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 1000

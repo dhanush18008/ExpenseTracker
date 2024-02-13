@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,9 +29,11 @@ public class ExpenseCategoryController {
     public ResponseEntity<String> getAllCategories() {
         try{
         List<ExpenseCategory> expenseCategories = categoryService.getAllCategories();
+        Map<String,List<ExpenseCategory>> hashmap=new HashMap<>();
+        hashmap.put("AllCategories",expenseCategories);
         ObjectMapper mapper=new ObjectMapper();
-        String jsonResponse=mapper.writeValueAsString(expenseCategories);
-            jsonResponse="AllCategories = "+jsonResponse;
+        String jsonResponse=mapper.writeValueAsString(hashmap);
+           // jsonResponse="AllCategories = "+jsonResponse;
             return new ResponseEntity<>(jsonResponse, HttpStatus.OK);
         }catch (JsonProcessingException e){
             return new ResponseEntity<>("Error occurred while processing JSON response.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -40,9 +43,6 @@ public class ExpenseCategoryController {
     @GetMapping("/categories/{categoryId}")
     public ResponseEntity<ExpenseCategory> getCategoryById(@PathVariable("categoryId") int categoryId) {
         ExpenseCategory category=categoryService.getCategoryById(categoryId);
-        if(category==null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         return new ResponseEntity<>(category,HttpStatus.OK);
     }
     @PostMapping("/categories")
@@ -73,9 +73,9 @@ public class ExpenseCategoryController {
         categoryService.deleteCategory(categoryId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @PostMapping("/categories/spend/{categoryId}")
-    public ResponseEntity<ExpenseCategory> spend(@PathVariable("categoryId") int categoryId, @RequestBody ExpenseCategory category) {
-            ExpenseCategory spentCategory = categoryService.spend(categoryId, category);
+    @PostMapping("/categories/spend")
+    public ResponseEntity<Object> spend(@RequestBody ExpenseCategory category) {
+            ExpenseCategory spentCategory = categoryService.spend(category);
             return new ResponseEntity<>(spentCategory, HttpStatus.OK);
     }
 
@@ -104,6 +104,36 @@ public class ExpenseCategoryController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private static final String HISTORY_FILE_PATH = "src/main/resources/expense_history.txt";
+
+    @GetMapping("/categories/history/download")
+    public ResponseEntity<ByteArrayResource> downloadExpenseHistoryFile() {
+        try {
+            // Read the contents of the history file
+            byte[] fileContent = Files.readAllBytes(Paths.get(HISTORY_FILE_PATH));
+
+            // Set headers for the response
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.TEXT_PLAIN);
+            headers.setContentDispositionFormData("attachment", "expense_history.txt");
+            headers.setContentLength(fileContent.length);
+
+            // Return the history file as a response entity
+            ByteArrayResource resource = new ByteArrayResource(fileContent);
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentLength(fileContent.length)
+                    .contentType(MediaType.parseMediaType("application/octet-stream"))
+                    .body(resource);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+
     }
 
 }
