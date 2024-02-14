@@ -16,9 +16,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+//    @Autowired
+//    CustomPropertyConfig c;
     @Bean
     public InMemoryUserDetailsManager userDetailsManager()
     {
+
         UserDetails user1= User.builder()
                 .username("dhanush")
                 .password(passwordEncoder().encode("qak076269#"))
