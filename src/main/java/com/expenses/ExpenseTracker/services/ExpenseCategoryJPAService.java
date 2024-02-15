@@ -32,12 +32,8 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
 
     @Override
     public ExpenseCategory getCategoryById(int categoryId) {
-        //try {
         ExpenseCategory expenseCategory = expenseCategoryJPARepository.findById(categoryId).get();
         return expenseCategory;
-        //}catch(Exception e) {
-        //throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        //}
     }
 
 
@@ -78,10 +74,12 @@ public class ExpenseCategoryJPAService implements ExpenseCategoryRepository {
 
         int categoryId = category.getCategoryId();
         @Valid ExpenseCategory expenseCategory = getCategoryById(categoryId);
-
+        int flag=0;
         expenseCategory.setLastUpdatedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
-
+        if(expenseCategory.getCategoryBudget() < category.getCategoryBudget())
+            flag=1;
         expenseCategory.setCategoryBudget(expenseCategory.getCategoryBudget() - category.getCategoryBudget());
+        if(flag==0)
         try {
             logExpenseUpdateToHistory(category, expenseCategory.getCategoryBudget(), expenseCategory.getCategoryName());
         }catch(Exception e) {

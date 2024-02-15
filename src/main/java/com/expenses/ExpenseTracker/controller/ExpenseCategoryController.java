@@ -2,6 +2,8 @@ package com.expenses.ExpenseTracker.controller;
 
 import com.expenses.ExpenseTracker.dao.ExpenseCategory;
 import com.expenses.ExpenseTracker.services.ExpenseCategoryJPAService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -20,30 +22,31 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@SecurityRequirement(name = "basicAuth")
 public class ExpenseCategoryController {
     @Autowired
     ExpenseCategoryJPAService categoryService;
+
+    /**
+     * The Rest API endpoint to get All the categories
+     *
+     * @return Returns all the categories
+     */
     @GetMapping("ExpenseTracker/v1.0/categories/all")
+    @Operation(description = "Get All Categories")
     public ResponseEntity<List<ExpenseCategory>> getAllCategories() {
-//        try{
         List<ExpenseCategory> expenseCategories = categoryService.getAllCategories();
-//        Map<String,List<ExpenseCategory>> hashmap=new HashMap<>();
-//        hashmap.put("AllCategories",expenseCategories);
-//        ObjectMapper mapper=new ObjectMapper();
-//        String jsonResponse=mapper.writeValueAsString(hashmap);
-           // jsonResponse="AllCategories = "+jsonResponse;
             return new ResponseEntity<>(expenseCategories, HttpStatus.OK);
-//        }catch (JsonProcessingException e){
-//            return new ResponseEntity<>("Error occurred while processing JSON response.", HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
     }
 
     @GetMapping("ExpenseTracker/v1.0/categories/{categoryId}")
+    @Operation(description = "Get Category By Id")
     public ResponseEntity<ExpenseCategory> getCategoryById(@PathVariable("categoryId") int categoryId) {
         ExpenseCategory category=categoryService.getCategoryById(categoryId);
         return new ResponseEntity<>(category,HttpStatus.OK);
     }
     @PostMapping("ExpenseTracker/v1.0/categories/create")
+    @Operation(description = "Create New Category")
     public ResponseEntity<ExpenseCategory> createCategory(@RequestBody @Valid ExpenseCategory category) {
         category.setDateOfCreation(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
         category.setLastUpdatedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString());
@@ -51,6 +54,7 @@ public class ExpenseCategoryController {
         return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);
     }
     @PutMapping("ExpenseTracker/v1.0/categories/update/{categoryId}")
+    @Operation(description = "Update Already Existing Category")
     public ResponseEntity<ExpenseCategory> updateCategory(
             @PathVariable("categoryId") int categoryId,
             @RequestBody @Valid ExpenseCategory category) {
@@ -64,16 +68,19 @@ public class ExpenseCategoryController {
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
     @DeleteMapping("ExpenseTracker/v1.0/categories/delete/{categoryId}")
+    @Operation(description = "Delete Already Existing Category")
     public ResponseEntity<Void> deleteCategory(@PathVariable("categoryId") int categoryId) {
         ExpenseCategory cc=categoryService.getCategoryById(categoryId);
         categoryService.deleteCategory(categoryId);
         return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("ExpenseTracker/v1.0/categories/CategoryAmount")
+    @Operation(description = "Get All Categories Budget")
     public ResponseEntity<Map<String, Integer>> amountRequired() {
         return new ResponseEntity<>(categoryService.amountRequired(), HttpStatus.OK);
     }
     @PostMapping("ExpenseTracker/v1.0/categories/spend")
+    @Operation(description = "Update Spending's Here")
     public ResponseEntity<Object> spend(@RequestBody ExpenseCategory category) {
             ExpenseCategory spentCategory = categoryService.spend(category);
             return new ResponseEntity<>(spentCategory, HttpStatus.OK);
@@ -83,9 +90,9 @@ public class ExpenseCategoryController {
 
 
     @GetMapping("ExpenseTracker/v1.0/categories/history")
+    @Operation(description = "Get Category By Id")
     public ResponseEntity<ByteArrayResource> getExpenseHistoryFile() {
         try {
-
             byte[] fileContent = Files.readAllBytes(Paths.get(ExpenseCategoryJPAService.HISTORY_FILE_PATH));
 
 

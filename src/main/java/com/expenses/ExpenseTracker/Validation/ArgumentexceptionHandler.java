@@ -21,7 +21,6 @@ public class ArgumentexceptionHandler {
         Map<String,String> error=new HashMap<>();
         error.put("ResponseCode","01");
         error.put("ResponseMessage","NO SUCH CATEGORY EXISTS");
-        //ex.getBindingResult().getFieldErrors().forEach(err->{error.put(err.getField(),err.getDefaultMessage());});
         return error;
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -30,7 +29,6 @@ public class ArgumentexceptionHandler {
         Map<String,String> error=new HashMap<>();
         error.put("ResponseCode","01");
         error.put("ResponseMessage","INVALID ID");
-        //ex.getBindingResult().getFieldErrors().forEach(err->{error.put(err.getField(),err.getDefaultMessage());});
         return error;
     }
 
@@ -49,8 +47,7 @@ public class ArgumentexceptionHandler {
     public Map<String,String> handle3(){
         Map<String,String> error=new HashMap<>();
         error.put("ResponseCode","01");
-        error.put("ResponseMessage","YOU CANT SPEND ABOVE THE BUDGET");
-       // ex.getBindingResult().getFieldErrors().forEach(err->{error.put(err.getField(),err.getDefaultMessage());});
+        error.put("ResponseMessage","YOU SHOULD NOT SPEND ABOVE THE BUDGET");
         return error;
     }
 
@@ -59,7 +56,6 @@ public class ArgumentexceptionHandler {
         Map<String,String> error=new HashMap<>();
         error.put("ResponseCode","01");
         error.put("ResponseMessage","YOU CANT SPEND ABOVE THE BUDGET");
-        // ex.getBindingResult().getFieldErrors().forEach(err->{error.put(err.getField(),err.getDefaultMessage());});
         return error;
     }
 }

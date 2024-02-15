@@ -2,57 +2,11 @@
 [13-02-2024] Category: food, Amount Spent: 200,Amount Left: 800
 [13-02-2024] Category: travel, Amount Spent: 200,Amount Left: 800
 [13-02-2024] Category: travel, Amount Spent: 2,Amount Left: 798
-[13-02-2024] Category: EMI, Amount Spent: 2,Amount Left: 2998
-[13-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2798
-[13-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2800
-[13-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2800
-[13-02-2024] Category: travel, Amount Spent: 1000,Amount Left: 0
-[13-02-2024] Category: travel, Amount Spent: 1000,Amount Left: 0
-[13-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
-[13-02-2024] Category: EMI, Amount Spent: 2000,Amount Left: 0
-[13-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
-[13-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 1000
-[13-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
-[13-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
-[14-02-2024] Category: EMI, Amount Spent: 3000,Amount Left: 0
-[14-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2800
-[14-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2800
-[14-02-2024] Category: EMI, Amount Spent: 200,Amount Left: 2800
 [14-02-2024] Category: food, Amount Spent: 200,Amount Left: 5800
-[14-02-2024] Category: EMI, Amount Spent: 3000,Amount Left: 0
-[14-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
-[14-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
-[14-02-2024] Category: food, Amount Spent: 1000,Amount Left: 5000
-[14-02-2024] Category: rent, Amount Spent: 1000,Amount Left: 4000
 [14-02-2024] Category: shopping, Amount Spent: 1000,Amount Left: 1000
-[14-02-2024] Category: travel, Amount Spent: 1000,Amount Left: 0
-[14-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
-[14-02-2024] Category: EMI, Amount Spent: 1000,Amount Left: 2000
-[14-02-2024] Category: EMI, Amount Spent: 2000,Amount Left: 1000
-[14-02-2024] Category: EMI, Amount Spent: 2000,Amount Left: 1000
-[14-02-2024] Category: EMI, Amount Spent: 2000,Amount Left: 1000
 [14-02-2024] Category: food, Amount Spent: 2000,Amount Left: 4000
 [14-02-2024] Category: food, Amount Spent: 4000,Amount Left: 0
-[14-02-2024] Category: food, Amount Spent: 7000,Amount Left: -1000
-[14-02-2024] Category: food, Amount Spent: 7000,Amount Left: -1000
-[14-02-2024] Category: EMI, Amount Spent: 7000,Amount Left: -4000
-[14-02-2024] Category: EMI, Amount Spent: 7000,Amount Left: -4000
-[14-02-2024] Category: EMI, Amount Spent: 7000,Amount Left: -4000
-[14-02-2024] Category: EMI, Amount Spent: 7000,Amount Left: -4000
-[14-02-2024] Category: EMI, Amount Spent: 7000,Amount Left: -4000
-[14-02-2024] Category: EMI, Amount Spent: 2000,Amount Left: 1000
-[14-02-2024] Category: food, Amount Spent: 2000,Amount Left: 4000
-[14-02-2024] Category: EMI, Amount Spent: 2000,Amount Left: 1000
-[14-02-2024] Category: EMI payment, Amount Spent: 2000,Amount Left: 1000
-[14-02-2024] Category: EMI payment, Amount Spent: 2000,Amount Left: -1000
-[14-02-2024] Category: EMI payment, Amount Spent: 1000,Amount Left: 0
-[14-02-2024] Category: EMI payment, Amount Spent: 1,Amount Left: -1
-[14-02-2024] Category: EMI payment, Amount Spent: 4000,Amount Left: -1000
-[14-02-2024] Category: EMI payment, Amount Spent: 4000,Amount Left: -1000
-[14-02-2024] Category: EMI payment, Amount Spent: 4000,Amount Left: -1000
-[14-02-2024] Category: EMI payment, Amount Spent: 5000,Amount Left: -2000
-[14-02-2024] Category: EMI payment, Amount Spent: 5000,Amount Left: -2000
-[14-02-2024] Category: EMI payment, Amount Spent: 5000,Amount Left: -2000
-[14-02-2024] Category: EMI payment, Amount Spent: 5000,Amount Left: -2000
-[14-02-2024] Category: food, Amount Spent: 7000,Amount Left: -1000
-[14-02-2024] Category: food, Amount Spent: 7000,Amount Left: -1000
+[15-02-2024] Category: food, Amount Spent: 100,Amount Left: 5900
+[15-02-2024] Category: food, Amount Spent: 100,Amount Left: 5900
+[15-02-2024] Category: food, Amount Spent: 100,Amount Left: 5900
+[15-02-2024] Category: travel, Amount Spent: 700,Amount Left: 300
